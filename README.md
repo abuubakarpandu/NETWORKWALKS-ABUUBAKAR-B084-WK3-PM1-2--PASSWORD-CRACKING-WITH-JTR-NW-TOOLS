@@ -94,7 +94,7 @@ John the Ripper performs a dictionary attack using the `rockyou.txt` wordlist.
 
 The following screenshot shows the hash extraction, hash inspection, password cracking process, and PDF viewer command.
 
-![John the Ripper Terminal Execution](JtRNetworkwalks/JtR.ping)
+![John the Ripper Terminal Execution](./JtRNetworkwalks/JtR.png)
 
 ---
 
@@ -114,7 +114,8 @@ The `&` symbol allows the process to run in the background.
 
 The following screenshot shows the successfully unlocked PDF document and the captured flag.
 
-![Unlocked PDF and Captured Flag](JtRNetworkwalks/JtRresult.ping)
+![Unlocked PDF and Captured Flag](./JtRNetworkwalks/JtRresult.png)
+
 
 ### 🏆 Final Results
 
@@ -129,6 +130,25 @@ The following screenshot shows the successfully unlocked PDF document and the ca
 nw{cybersecurity_flag_captured_2608}
 ```
 
+---
+
+### ⚠️ 2.3 Troubleshooting & Dependency Resolution: `pyhanko`
+
+#### 📌 Issue Overview
+During hash extraction with `pdf2john`, an issue can arise if the **`pyhanko`** Python dependency is missing, incomplete, or restricted by system-level Python package policies on Kali Linux. When `pyhanko` is not properly configured, `pdf2john` may fail to parse encrypted PDF structures or fail to generate a valid hash output.
+
+* **[Picture Placeholder: Insert screenshot here — showing any `pyhanko` / `pdf2john` error or verification check if applicable]**
+
+#### 🛠️ Diagnostic & Resolution Matrix
+
+| 🔍 Finding / Risk | 💻 Action / Command Placeholder | 🎯 Technical Purpose | ✅ Verification & Expected Outcome |
+| :--- | :--- | :--- | :--- |
+| **Missing or unverified `pyhanko` module** | **[Command Placeholder: `python3 -c "import pyhanko; print('pyhanko is ready')"`]** | Verifies whether Python can import `pyhanko` cleanly in the current environment. | Outputs `pyhanko is ready` with zero `ModuleNotFoundError` messages. |
+| **Incomplete or blocked installation** | **[Command Placeholder: `sudo apt update && sudo apt install -y python3-pyhanko || pip install --upgrade --break-system-packages pyhanko`]** | Installs or upgrades `pyhanko` via `apt`, falling back to `pip` (`--break-system-packages`) if restricted by Kali's managed Python environment. | Completes installation cleanly and passes the `pyhanko` import verification check. |
+| **Hash extraction after remediation** | **[Command Placeholder: `pdf2john "/media/sf_shared/My Locked PDF1.pdf" > ~/pdf_hash.txt`]** | Re-runs hash extraction on the target PDF once `pyhanko` is confirmed working. | Generates a valid `$pdf$...` hash string inside `~/pdf_hash.txt` without errors. |
+
+#### 📝 Reporting Note
+Resolving `pyhanko` prior to hash extraction ensures consistent `pdf2john` behavior across encrypted PDFs and prevents avoidable workflow interruptions during assessment or lab documentation.
 ---
 
 ## ✅ 5. Conclusion
